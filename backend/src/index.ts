@@ -1,11 +1,20 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Express } from 'express';
+import { dbConnect } from './config/dbconfig';
 
 const app: Express = express();
-const port = 8000;
+const port = process.env.PORT;
 
-//initializing the server
-app.get('/', (req: Request, res: Response, next: NextFunction) => {});
+/* Initializing Server */
 
+/* Middlewares */
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/* Database Connection */
+dbConnect();
+
+/* Open Port - Init Server */
 app.listen(port, () => {
   console.log(`Server is Running at port ${port}`);
 });
