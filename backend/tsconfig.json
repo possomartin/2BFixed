@@ -11,7 +11,18 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "rootDir": "./src",
     "outDir": "./dist",
+<<<<<<< HEAD
+    "isolatedModules": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@config/*": ["config/*"],
+      "@models/*": ["models/*"],
+      "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"]
+    }
+=======
     "isolatedModules": true
+>>>>>>> main
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"],
