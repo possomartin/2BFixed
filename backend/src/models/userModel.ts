@@ -4,6 +4,9 @@ export interface IUser extends Document {
   fullName: string;
   email: string;
   number: string;
+  is_verified: boolean;
+  created_at: Date;
+  accepted_terms_at: Date;
 }
 
 const UserSchema: Schema = new Schema({
@@ -22,6 +25,17 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
     minlength: 10,
+  },
+  is_verified: {
+    type: Boolean,
+    default: false,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  accepted_terms_at: {
+    type: Date,
   },
 });
 
