@@ -1,4 +1,5 @@
 import { IUser, UserModel } from '@models/userModel';
+import mongoose from 'mongoose';
 
 /* User interface definition */
 export interface IUserService {
@@ -6,6 +7,10 @@ export interface IUserService {
   getUserByEmail: (email: string) => Promise<IUser | null>;
   deleteUserByEmail: (email: string) => Promise<IUser | null>;
   createUser: (user: IUser) => Promise<IUser>;
+  updateUser: (
+    _userID: mongoose.Types.ObjectId,
+    content: Partial<IUser>,
+  ) => Promise<IUser | null>;
 }
 
 /* Get All Users */
@@ -27,9 +32,18 @@ const createUser = async (user: IUser) => {
   return user.save();
 };
 
+/* Update user by ID */
+const updateUser = async (
+  _userID: mongoose.Types.ObjectId,
+  content: Partial<IUser>,
+): Promise<IUser | null> => {
+  return UserModel.findByIdAndUpdate(_userID, content).exec();
+};
+
 export const UserService: IUserService = {
   getAllUsers: getAllUsers,
   getUserByEmail: getUserByEmail,
   deleteUserByEmail: deleteUserByEmail,
   createUser: createUser,
+  updateUser: updateUser,
 };
