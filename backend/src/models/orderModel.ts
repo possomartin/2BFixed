@@ -3,7 +3,7 @@ import mongoose, { Model, Schema, Document } from 'mongoose';
 export interface IOrder extends Document {
   _userID: mongoose.Schema.Types.ObjectId;
   order_date: Date;
-  service_fee: Number;
+  service_fee: number;
   _discountID: mongoose.Schema.Types.ObjectId;
   tip: number;
   total: number;
