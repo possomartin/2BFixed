@@ -9,6 +9,9 @@ export interface IOrderService {
     _userdID: mongoose.Schema.Types.ObjectId,
   ) => Promise<IOrder[] | null>;
   getOrdersByDate: (order_date: Date) => Promise<IOrder[] | null>;
+  getOrdersByReplacement: (
+    _replacementID: mongoose.Schema.Types.ObjectId,
+  ) => Promise<IOrder[] | null>;
   getOrderByID: (id: mongoose.Schema.Types.ObjectId) => Promise<IOrder | null>;
 
   updateOrder: (
@@ -31,8 +34,16 @@ const getOrdersByUser = async (
   return OrderModel.find({ _userID: _userID }).exec();
 };
 
+const getOrdersByReplacement = async (
+  _replacementID: mongoose.Schema.Types.ObjectId,
+): Promise<IOrder[] | null> => {
+  return OrderModel.find({ _replacementID: _replacementID }).exec();
+};
+
 const getOrdersByDate = async (order_date: Date): Promise<IOrder[] | null> => {
-  return OrderModel.find({ order_date: order_date }).exec();
+  return OrderModel.find({
+    order_date: { $gte: new Date(order_date), $lte: new Date() },
+  }).exec();
 };
 
 const getOrderByID = async (
@@ -60,11 +71,12 @@ const createOrder = async (order: IOrder): Promise<IOrder | null> => {
 
 /* Exporting Service */
 export const OrderService: IOrderService = {
-  getOrders: getOrders,
-  getOrdersByUser: getOrdersByUser,
-  getOrdersByDate: getOrdersByDate,
-  getOrderByID: getOrderByID,
-  updateOrder: updateOrder,
-  deleteOrder: deleteOrder,
-  createOrder: createOrder,
+  getOrders,
+  getOrdersByUser,
+  getOrdersByReplacement,
+  getOrdersByDate,
+  getOrderByID,
+  updateOrder,
+  deleteOrder,
+  createOrder,
 };

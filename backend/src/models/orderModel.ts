@@ -5,6 +5,7 @@ export interface IOrder extends Document {
   order_date: Date;
   service_fee: number;
   _discountID: mongoose.Schema.Types.ObjectId;
+  _replacementID: mongoose.Schema.Types.ObjectId;
   tip: number;
   total: number;
 }
@@ -21,6 +22,10 @@ const OrderSchema: Schema<IOrder> = new Schema<IOrder>({
   },
   service_fee: {
     type: Number,
+    required: true,
+  },
+  _replacementID: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   _discountID: {
