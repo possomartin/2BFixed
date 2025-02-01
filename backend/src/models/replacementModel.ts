@@ -5,7 +5,6 @@ export interface IReplacement extends Document {
   replacement_name: string;
   device_model: string;
   price: number;
-  _orderID: mongoose.Schema.Types.ObjectId;
 }
 
 const ReplacementSchema: Schema<IReplacement> = new Schema<IReplacement>({
