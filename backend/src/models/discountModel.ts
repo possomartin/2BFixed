@@ -1,8 +1,8 @@
 import mongoose, { Model, Schema, Document } from 'mongoose';
 
 export interface IDiscount extends Document {
-  discount_name: String;
-  discount_amount: Number;
+  discount_name: string;
+  discount_amount: number;
   discount_expires: Date;
 }
 

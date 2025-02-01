@@ -6,7 +6,7 @@ export interface ITnC extends Document {
   _userID: mongoose.Schema.Types.ObjectId;
   creation_date: Date;
   expiration_date: Date;
-  accepted: Boolean;
+  accepted: boolean;
 }
 
 const TncSchema: Schema = new Schema({
